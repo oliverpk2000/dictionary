@@ -29,3 +29,29 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+#links ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+#links li {
+    float: left;
+    color: black;
+    padding-right: 1%;
+}
+
+a {
+    color: black;
+}
+
+.part {
+    padding: 1%;
+    border: 1px black solid;
+    margin: 10px;
+}
+
+#back {
+    color: inherit;
+    text-decoration: inherit;
+}
