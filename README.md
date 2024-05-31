@@ -2,7 +2,7 @@
 
 Quick project to learn GitHub pages deployment and jQuery.
 
-## how to use
+## How to use
 
 just go to this website [https://oliverpk2000.github.io/dictionary/](https://oliverpk2000.github.io/dictionary/) and look up some word definitions.
 
