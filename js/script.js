@@ -18,6 +18,8 @@ async function loadWordDefinitions(word) {
 
         console.log(data.length);
 
+        $(".def").remove();
+
         for (let index = 0; index < data.length; index++) {
             console.log(data[index]);
             generateWordDefinitionHtml(data[index], index);
@@ -34,10 +36,7 @@ function generateWordDefinitionHtml(definition, index) {
 
     console.log(id);
 
-    $("#definitions").append(`<div>${index + 1}: ${definition["word"]}</div>`).attr({
-        "class": "def",
-        "id": id
-    }).show();
+    $("#definitions").append(`<div class="def" id="${id}">${index + 1}: ${definition["word"]}</div>`).show();
 
 
     for (let meaning of definition["meanings"]) {
@@ -53,10 +52,7 @@ function generateWordDefinitionHtml(definition, index) {
             .map((def) => `<li>${def}</li>`)
             .reduce((acc, current) => acc + current, "",);
 
-        $(`#${id}`).append(`<div><p>(${partOfSpeech}):</p><ul>${listElementsAsString}</ul></div>`).attr({
-            "class": "meaning",
-
-        }).show();
+        $(`#${id}`).append(`<div class="meaning"><p>(${partOfSpeech}):</p><ul>${listElementsAsString}</ul></div>`).show();
 
 
     }
