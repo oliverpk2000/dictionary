@@ -2,7 +2,6 @@ const baseUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 $("#search").on("submit", function (event) {
     let word = $("#word").first().val();
-    $("#status").html(`<h2>definitions for: ${word}</h2>`).show();
     $("#definitions").empty();
     loadWordDefinitions(word);
     event.preventDefault();
@@ -16,14 +15,21 @@ async function loadWordDefinitions(word) {
         const response = await fetch(completeUrl);
         const data = await response.json();
 
-        console.log(data.length);
-
         $(".def").remove();
+
+
+        if (data["title"] == "No Definitions Found") {
+            $("#status").html(`<h2>no definitions found for ${word}</h2>`);
+            return;
+        }
+
+        $("#status").html(`<h2>definitions for: ${word}</h2>`).show();
 
         for (let index = 0; index < data.length; index++) {
             console.log(data[index]);
             generateWordDefinitionHtml(data[index], index);
         }
+
 
     } catch (err) {
         $("#status").html(`<h2>error getting data: ${err}</h2>`);
