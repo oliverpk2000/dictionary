@@ -1,0 +1,31 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.def {
+    padding: 1%;
+    border: 1px black solid;
+    margin: 10px;
+}
+
+#searchbar {
+    padding: 10px;
+}
+
+#searchbar input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#searchbar input[type="submit"] {
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+    border: 1px black solid;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
