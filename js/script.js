@@ -26,7 +26,6 @@ async function loadWordDefinitions(word) {
         $("#status").html(`<h2>definitions for: ${word}</h2>`).show();
 
         for (let index = 0; index < data.length; index++) {
-            console.log(data[index]);
             generateWordDefinitionHtml(data[index], index);
         }
 
@@ -40,10 +39,7 @@ async function loadWordDefinitions(word) {
 function generateWordDefinitionHtml(definition, index) {
     let id = `def_${index}`;
 
-    console.log(id);
-
-    $("#definitions").append(`<div class="def" id="${id}">${index + 1}: ${definition["word"]}</div>`).show();
-
+    $("#definitions").append(`<div class="def" id="${id}">${index + 1}: ${definition["word"]} ${generatePhoneticsLinks(definition["phonetics"])}</div>`).show();
 
     for (let meaning of definition["meanings"]) {
         let partOfSpeech = meaning["partOfSpeech"];
@@ -63,4 +59,30 @@ function generateWordDefinitionHtml(definition, index) {
 
     }
 
+}
+
+function generatePhoneticsLinks(phonetics) { 
+
+    let phoneticLinks = []
+
+    for (let phoneticData of phonetics) {
+
+        let text = phoneticData["text"];
+        let audioLink = phoneticData["audio"];
+        let countryEmoji = "";
+
+        if (audioLink.includes("uk.mp3")) {
+            countryEmoji = "🇬🇧";
+        }
+
+        if (audioLink.includes("us.mp3")) {
+            console.log("here");
+            countryEmoji = "🇺🇸";
+        }
+
+        let link = `<a href="${audioLink}">${text} [${countryEmoji}]</a>`;
+        phoneticLinks.push(link);
+    }
+
+    return phoneticLinks.join(" | ");
 }
