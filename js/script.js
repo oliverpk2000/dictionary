@@ -19,7 +19,7 @@ async function loadWordDefinitions(word) {
 
 
         if (data["title"] == "No Definitions Found") {
-            $("#status").html(`<h2>no definitions found for ${word}</h2>`);
+            $("#status").html(`<h2>no definitions found for: ${word}</h2>`);
             return;
         }
 
