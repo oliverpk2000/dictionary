@@ -81,6 +81,8 @@ function generatePhoneticsLinks(phonetics) {
 
         let audioLink = phoneticData["audio"];
 
+        // if the phoneticData doesn't have a link to the audio, we still display a text for it
+
         if (audioLink === "") {
             let phoneticTextSpan = `<span>${text}</span>`;
             phoneticLinks.push(phoneticTextSpan);
@@ -92,7 +94,7 @@ function generatePhoneticsLinks(phonetics) {
 
         countryEmoji = fileEmojiTranslator[countryIndicator];
 
-        if(countryEmoji == undefined){
+        if (countryEmoji == undefined) {
             continue;
         }
 
