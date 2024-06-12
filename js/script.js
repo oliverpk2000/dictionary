@@ -1,5 +1,11 @@
 const baseUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
+const fileEmojiTranslator = {
+    "au.mp3": "🇦🇺",
+    "uk.mp3": "🇬🇧",
+    "us.mp3": "🇺🇸",
+}
+
 $("#search").on("submit", function (event) {
     let word = $("#word").first().val();
     $("#definitions").empty();
@@ -61,27 +67,37 @@ function generateWordDefinitionHtml(definition, index) {
 
 }
 
-function generatePhoneticsLinks(phonetics) { 
+function generatePhoneticsLinks(phonetics) {
 
     let phoneticLinks = []
 
     for (let phoneticData of phonetics) {
 
         let text = phoneticData["text"];
+
+        if (text == undefined) {
+            continue;
+        }
+
         let audioLink = phoneticData["audio"];
+
+        if (audioLink === "") {
+            let phoneticTextSpan = `<span>${text}</span>`;
+            phoneticLinks.push(phoneticTextSpan);
+        }
+
         let countryEmoji = "";
 
-        if (audioLink.includes("uk.mp3")) {
-            countryEmoji = "🇬🇧";
+        let countryIndicator = audioLink.slice(-6);
+
+        countryEmoji = fileEmojiTranslator[countryIndicator];
+
+        if(countryEmoji == undefined){
+            continue;
         }
 
-        if (audioLink.includes("us.mp3")) {
-            console.log("here");
-            countryEmoji = "🇺🇸";
-        }
-
-        let link = `<a href="${audioLink}">${text} [${countryEmoji}]</a>`;
-        phoneticLinks.push(link);
+        let phoneticLink = `<a href="${audioLink}">${text} [${countryEmoji}]</a>`;
+        phoneticLinks.push(phoneticLink);
     }
 
     return phoneticLinks.join(" | ");
