@@ -60,11 +60,25 @@ function generateWordDefinitionHtml(definition, index) {
             .map((def) => `<li>${def}</li>`)
             .reduce((acc, current) => acc + current, "",);
 
-        $(`#${id}`).append(`<div class="meaning"><p>(${partOfSpeech}):</p><ul>${listElementsAsString}</ul></div>`).show();
+        let synonyms = generateWordListAsString(meaning["synonyms"], "synonyms");
+        let antonyms = generateWordListAsString(meaning["antonyms"], "antonyms");
 
+        $(`#${id}`)
+            .append(`<div class="meaning"><p>(${partOfSpeech}):</p><ul>${listElementsAsString}</ul><p>${synonyms}</p><p>${antonyms}</p></div>`)
+            .show();
 
     }
 
+}
+
+function generateWordListAsString(wordList, listName){
+    if(wordList.length == 0){
+        return "";
+    }
+    
+    wordListAsString = wordList.join(", ");
+
+    return `${listName}: [${wordListAsString}]`;
 }
 
 function generatePhoneticsLinks(phonetics) {
