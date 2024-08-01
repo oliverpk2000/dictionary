@@ -39,7 +39,6 @@ async function loadWordDefinitions(word) {
     } catch (err) {
         $("#status").html(`<h2>error getting data: ${err}</h2>`);
     }
-
 }
 
 function generateWordDefinitionHtml(definition, index) {
@@ -66,16 +65,14 @@ function generateWordDefinitionHtml(definition, index) {
         $(`#${id}`)
             .append(`<div class="meaning"><p>(${partOfSpeech}):</p><ul>${listElementsAsString}</ul><p>${synonyms}</p><p>${antonyms}</p></div>`)
             .show();
-
     }
-
 }
 
-function generateWordListAsString(wordList, listName){
-    if(wordList.length == 0){
+function generateWordListAsString(wordList, listName) {
+    if (wordList.length == 0) {
         return "";
     }
-    
+
     wordListAsString = wordList.join(", ");
 
     return `${listName}: [${wordListAsString}]`;
